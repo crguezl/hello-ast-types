@@ -1,4 +1,3 @@
-import assert from "assert";
 import * as espree from  "espree";
 
 import {
