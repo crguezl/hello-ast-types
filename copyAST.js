@@ -1,15 +1,13 @@
-import {
-    namedTypes as n,
-    builders as b,
-  } from "ast-types";
-  import recast from 'recast';
-  
+import { namedTypes as n, builders as b } from "ast-types";
+import recast from "recast";
+
 import { eachField } from "ast-types";
 
 const fooId = b.identifier("foo");
-const node = b.ifStatement(fooId, b.blockStatement([
-    b.expressionStatement(b.callExpression(fooId, []))
-  ]));
+const node = b.ifStatement(
+  fooId,
+  b.blockStatement([b.expressionStatement(b.callExpression(fooId, []))])
+);
 
 const copy = {};
 
@@ -22,11 +20,11 @@ const copy = {};
 //      callback.call(this, name, getFieldValue(object, name));
 //    }, context);
 //  }
-eachField(node, function(name, value) {
+eachField(node, function (name, value) {
   // Note that undefined fields will be visited too, according to
   // the rules associated with node.type, and default field values
   // will be substituted if appropriate.
   copy[name] = value;
-})
+});
 
 console.log(recast.print(copy).code);
