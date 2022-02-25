@@ -3,6 +3,7 @@ import {
   namedTypes as n,
   builders as b,
 } from "ast-types";
+import recast from 'recast';
 
 var fooId = b.identifier("foo");
 debugger;
@@ -24,3 +25,6 @@ assert.strictEqual(ifFoo.test, fooId);
 assert.ok(n.Expression.check(ifFoo.test));
 assert.ok(n.Identifier.check(ifFoo.test));
 assert.ok(!n.Statement.check(ifFoo.test));
+
+console.log(JSON.stringify(ifFoo,null,2));
+console.log(recast.print(ifFoo).code);

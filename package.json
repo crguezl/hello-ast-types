@@ -11,6 +11,7 @@
   "author": "Casiano Rodriguez Leon <crguezl@ull.edu.es> (https://crguezl.github.io/)",
   "license": "ISC",
   "dependencies": {
-    "ast-types": "^0.14.2"
+    "ast-types": "^0.14.2",
+    "recast": "^0.20.5"
   }
 }
