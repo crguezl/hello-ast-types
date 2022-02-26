@@ -5,6 +5,10 @@ import {
 } from "ast-types";
 import recast from 'recast';
 
+/* Build the AST for
+if (foo) foo();
+*/
+
 var fooId = b.identifier("foo");
 debugger;
 var ifFoo = b.ifStatement(fooId, b.blockStatement([
