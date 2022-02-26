@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node --inspect-brk index.js",
+    "visit": "node visitmemberexpression.js",
     "spread": "node spread-operator.js"
   },
   "keywords": [],

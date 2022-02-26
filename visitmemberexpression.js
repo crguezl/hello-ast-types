@@ -1,4 +1,4 @@
-import * as espree from  "espree";
+import espree from  "flow-parser";
 
 import {
   visit,
@@ -7,14 +7,18 @@ import {
 
 let code = `
 /* Early versions of JavaScript did not allow named function expressions, 
-and for this reason you could not make a recursive function expression. */
+and for this reason you could not make a recursive function expression. 
+May be you want to detect uses of this old trick to update the code.
+*/
 
 var fac = function(n) { return !(n > 1) ? 1 : arguments.callee(n - 1) * n; }
 `;
 
+console.log(`Input:\n${code}\n---`);
+
 let ast = espree.parse(code, {loc: false});
 
-console.log(JSON.stringify(ast, null,2));
+// console.log(JSON.stringify(ast, null,2));
 
 visit(ast, {
   // This method will be called for any node with .type "MemberExpression":
