@@ -1,7 +1,8 @@
 import { namedTypes as n, builders as b, visit } from "ast-types";
 import recast from "recast";
-import * as espree from  "espree";
+import espree from  "flow-parser";
 
+console.log(espree);
 
 var sliceExpr = b.memberExpression(
     b.memberExpression(
@@ -20,7 +21,9 @@ var sliceExpr = b.memberExpression(
 //console.log(recast.print(sliceExpr).code);
 
 let code = `
-function tutu(...rest) {}
+function tutu(x, ...rest) {
+    return x + rest[0];
+}
 `;
 
 // Warning!!! the AST produced by Espree doesn't seem to be fully compatible with ast-types

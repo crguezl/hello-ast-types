@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --inspect-brk index.js"
+    "start": "node --inspect-brk index.js",
+    "spread": "node spread-operator.js"
   },
   "keywords": [],
   "author": "Casiano Rodriguez Leon <crguezl@ull.edu.es> (https://crguezl.github.io/)",
@@ -13,6 +14,7 @@
   "dependencies": {
     "ast-types": "^0.14.2",
     "espree": "^9.3.1",
+    "flow-parser": "^0.172.0",
     "recast": "^0.20.5"
   }
 }
