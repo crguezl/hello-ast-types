@@ -9,7 +9,8 @@ const a = 4;
 function tutu(a) {
     const b = a+1;
     function titi(x) {
-        return x+1:
+        const d = x*2;
+        return d:
     }
     return b;
 }
