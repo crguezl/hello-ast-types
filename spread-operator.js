@@ -1,6 +1,6 @@
 import { namedTypes as n, builders as b, visit } from "ast-types";
 import recast from "recast";
-import flow from  "flow-parser";
+import flow from  "espree";
 
 var sliceExpr = b.memberExpression(
     b.memberExpression(
