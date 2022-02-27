@@ -8,8 +8,13 @@ const a = 4;
 
 function tutu(a) {
     const b = a+1;
+    function titi(x) {
+        return x+1:
+    }
     return b;
 }
+
+tutu(a);
 `;
 
 let ast = flow.parse(code);
