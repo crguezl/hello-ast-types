@@ -86,6 +86,9 @@ Warning! 'arguments.callee' is used in this code
 
 Translate ES6 spread operator to older versions of JS.
 
+Transforming `...rest` parameters into browser-runnable ES5 JavaScript:
+
+
 For the input:
 
 ```js 
@@ -108,6 +111,8 @@ function tutu(x) {
 ```
 
 ## check-this-usage.js
+
+Implement a function that determines if a given function node refers to `this`
 
 This example has been modified regarding not only the usage of `super`  but also due to the fact
 that `visitFunction` is triggered by the outer function and the original  produced an erroneous result 
