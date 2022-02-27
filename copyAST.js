@@ -1,7 +1,9 @@
 import { namedTypes as n, builders as b } from "ast-types";
 import recast from "recast";
-
+import flow from 'flow-parser';
 import { eachField } from "ast-types";
+
+const deb = x => (JSON.stringify(x, null,2));
 
 const fooId = b.identifier("foo");
 const node = b.ifStatement(
@@ -27,4 +29,11 @@ eachField(node, function (name, value) {
   copy[name] = value;
 });
 
+console.log(copy);
+
 console.log(recast.print(copy).code);
+/*
+if (foo) {
+    foo();
+}
+*/

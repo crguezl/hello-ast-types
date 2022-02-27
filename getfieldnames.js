@@ -3,15 +3,23 @@ import {
     getFieldValue,
   } from "ast-types";
   
-  const partialFunExpr = { type: "FunctionExpression" };
+  const dummyNode = { type: "FunctionExpression" };
   
-  // Even though partialFunExpr doesn't actually contain all the fields that
+  // Even though dummyNode doesn't actually contain all the fields that
   // are expected for a FunctionExpression, types.getFieldNames knows:
-  console.log(getFieldNames(partialFunExpr));
-  // [ 'type', 'id', 'params', 'body', 'generator', 'expression',
-  //   'defaults', 'rest', 'async' ]
-  
+  console.log(getFieldNames(dummyNode));
+  /*
+  [
+  'type',           'id',
+  'params',         'body',
+  'generator',      'async',
+  'expression',     'defaults',
+  'rest',           'returnType',
+  'typeParameters', 'predicate'
+  ]
+  */
+
   // For fields that have default values, types.getFieldValue will return
   // the default if the field is not actually defined.
-  console.log(getFieldValue(partialFunExpr, "generator"));
-  // false
+  console.log(getFieldValue(dummyNode, "id"));
+  // null
