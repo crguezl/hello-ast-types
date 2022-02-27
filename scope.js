@@ -24,6 +24,7 @@ visit(ast, {
 
     visitVariableDeclarator(path) {
         const node = path.node;
+
         console.log(node.id.name, path.scope.isGlobal, path.scope.depth);
 
         this.traverse(path)

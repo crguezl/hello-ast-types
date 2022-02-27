@@ -8,7 +8,8 @@
     "start": "node --inspect-brk index.js",
     "visit": "node visitmemberexpression.js",
     "spread": "node spread-operator.js",
-    "this": "node check-this-usage.js"
+    "this": "node check-this-usage.js",
+    "scope-object": "node scope-object.js > salida-scope-objects.js"
   },
   "keywords": [],
   "author": "Casiano Rodriguez Leon <crguezl@ull.edu.es> (https://crguezl.github.io/)",
