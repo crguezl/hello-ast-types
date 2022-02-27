@@ -181,6 +181,19 @@ true
 > node scope-object.js > salida-scope-objects.js
 ```
 
+The program used as input for the test is:
+
+```js
+const a = 4;
+
+function tutu(a) {
+    const b = a+1;
+    return b;
+}
+
+tutu(a);
+```
+
 Contents of `salida-scope-objects.js`
 
 ```js
