@@ -19,7 +19,7 @@ tutu(a);
 `;
 
 let ast = flow.parse(code);
-
+let variable = process.argv[2] || 'a';
 visit(ast, {
 
     visitVariableDeclarator(path) {
@@ -27,6 +27,9 @@ visit(ast, {
         console.log(node.id.name, path.scope.isGlobal, path.scope.depth);
 
         this.traverse(path)
+
+        // Returns {  isGlobal: false if local, didScan: true if found }
+        console.log(`Searching for '${variable}' ${deb(path.scope.lookup(variable))}`)
     }
 })
 
