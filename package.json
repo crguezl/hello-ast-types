@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node --inspect-brk index.js",
     "visit": "node visitmemberexpression.js",
-    "spread": "node spread-operator.js"
+    "spread": "node spread-operator.js",
+    "this": "node check-this-usage.js"
   },
   "keywords": [],
   "author": "Casiano Rodriguez Leon <crguezl@ull.edu.es> (https://crguezl.github.io/)",

@@ -1,3 +1,7 @@
+# Learning ast-types 
+
+The examples here are based in the examples in <https://github.com/benjamn/ast-types>
+README.md
 
 ## index.js
 
@@ -103,3 +107,58 @@ function tutu(x) {
 }
 ```
 
+## check-this-usage.js
+
+```
+➜  hello-ast-types git:(master) ✗ npm run this
+
+> hello-ast-types@1.0.0 this
+> node check-this-usage.js
+
+
+function tutu() {
+    return this.prop+4;
+}
+
+Inside Function visitor tutu
+inside thisexpression
+true
+----
+
+function tutu() {
+    return prop+4;
+}
+
+Inside Function visitor tutu
+false
+----
+
+function tutu() {
+    function titi() {
+        return this.prop+4;
+    }
+    
+    return prop+4;
+}
+
+Inside Function visitor tutu
+Inside Function visitor titi
+false
+----
+
+  function tutu() {
+    return super();
+  }
+
+Inside Function visitor tutu
+true
+----
+
+  function tutu() {
+    return super.meth();
+  }
+
+Inside Function visitor tutu
+true
+----
+```
