@@ -7,10 +7,17 @@ const deb = x => (JSON.stringify(x, null,2));
 
 const fooId = b.identifier("foo");
 const node = b.ifStatement(
-  fooId,
-  b.blockStatement([b.expressionStatement(b.callExpression(fooId, []))])
+               fooId,
+                b.blockStatement([
+                    b.expressionStatement(
+                        b.callExpression(fooId, []))
+                ])
 );
 
+/* Similar to 
+const dupNode = flow.parse(`if (foo) foo()`).body[0];
+console.log(dupNode)
+*/
 const copy = {};
 
 // Iterate over all defined fields of an object, including those missing
@@ -29,7 +36,7 @@ eachField(node, function (name, value) {
   copy[name] = value;
 });
 
-console.log(copy);
+console.log(deb(copy));
 
 console.log(recast.print(copy).code);
 /*

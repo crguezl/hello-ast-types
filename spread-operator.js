@@ -1,8 +1,6 @@
 import { namedTypes as n, builders as b, visit } from "ast-types";
 import recast from "recast";
-import espree from  "flow-parser";
-
-console.log(espree);
+import flow from  "flow-parser";
 
 var sliceExpr = b.memberExpression(
     b.memberExpression(
@@ -26,8 +24,8 @@ function tutu(x, ...rest) {
 }
 `;
 
-// Warning!!! the AST produced by Espree doesn't seem to be fully compatible with ast-types
-let ast = espree.parse(code, {ecmaVersion: 7, loc: false});
+// Warning!!! the AST produced by flow doesn't seem to be fully compatible with ast-types
+let ast = flow.parse(code, {ecmaVersion: 7, loc: false});
 
 //console.log(JSON.stringify(ast, null,2));
 
@@ -59,14 +57,15 @@ visit(ast, {
     // rest parameters.
     // console.log(node.params[0]);
 
-    let lastArg = node.params.pop();
+    let lastArg = node.params[node.params.length-1];
 
     if (lastArg.type !== "RestElement") {
       //console.log("No rest argument in this function!")
       return;
-    } else {
-        //console.log("Found a RestElement in this function")
-    }
+    } 
+    node.params.pop();
+    //console.log("Found a RestElement in this function")
+    
     
     // For the purposes of this example, we won't worry about functions
     // with Expression bodies.
