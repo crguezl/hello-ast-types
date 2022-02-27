@@ -109,6 +109,10 @@ function tutu(x) {
 
 ## check-this-usage.js
 
+This example has been modified regarding not only the usage of `super`  but also due to the fact
+that `visitFunction` is triggered by the outer function and the original  produced an erroneous result 
+
+
 ```
 ➜  hello-ast-types git:(master) ✗ npm run this
 
