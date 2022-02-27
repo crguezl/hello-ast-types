@@ -33,11 +33,29 @@ function tutu() {
 `
 ;
 
-let test = [code1, code2, code3];
+let code4 = `
+  function tutu() {
+    return super();
+  }
+`
+;
+
+let code5 = `
+  function tutu() {
+    return super.meth();
+  }
+`
+;
+
+let test = [
+    code1, code2, code3, 
+    code4,
+    code5,
+];
 
 test.forEach(code => {
     console.log(code);
-    
+
     let ast = flow.parse(code).body[0];
     //console.log(deb(ast));
     //process.exit(0);
@@ -65,14 +83,12 @@ test.forEach(code => {
             // ThisExpression nodes in nested scopes don't count as `this`
             // references for the original function node, so we can safely
             // avoid traversing this subtree.
-            if (path.node.id.name !== 'tutu') {
+            if (path.node !== funcNode) {
                 return false;
             }
             this.traverse(path);
-    
           },
           
-      
           visitCallExpression(path) {
             const node = path.node;
       
@@ -90,15 +106,15 @@ test.forEach(code => {
       
           // Yes, you can define arbitrary helper methods.
           isSuperCallExpression(callExpr) {
+            //console.log('inside callExpr')
             n.CallExpression.assert(callExpr);
-            return this.isSuperIdentifier(callExpr.callee)
-                || this.isSuperMemberExpression(callExpr.callee);
+            return this.isSuperIdentifier(callExpr) || this.isSuperMemberExpression(callExpr);
           },
       
           // And even helper helper methods!
           isSuperIdentifier(node) {
-            return n.Identifier.check(node.callee)
-                && node.callee.name === "super";
+            // console.log(deb(node));
+            return n.Identifier.check(node.callee) && node.callee.name === "super";
           },
       
           isSuperMemberExpression(node) {
@@ -112,5 +128,6 @@ test.forEach(code => {
       }
     
     console.log(usesThis(ast));
+    console.log('----')
 });
 
