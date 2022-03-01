@@ -1,8 +1,6 @@
 //import  * as espree from "espree";
 import { parse } from "espree";
-import {
-    NodePath,
-  } from "ast-types";
+import {  NodePath } from "ast-types";
 
   const deb = x => (JSON.stringify(x, null, 2));
 
