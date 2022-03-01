@@ -1,5 +1,5 @@
 import assert from "assert";
-import { parse, Syntax } from "espree";
+import { parse } from "espree";
 import { namedTypes as n, NodePath,} from "ast-types";
 
 const deb = (x) => JSON.stringify(x, null, 2);
