@@ -1,5 +1,5 @@
 import assert from "assert";
-import { parse } from "espree";
+import { parse, Syntax } from "esprima";
 import { namedTypes as n, visit, NodePath,} from "ast-types";
 import * as esprimaFb from "esprima-fb"; // Esprima-FB is a fork of the Harmony branch of Esprima that implements JSX specification on top of ECMAScript syntax.
 
@@ -56,12 +56,10 @@ import * as esprimaFb from "esprima-fb"; // Esprima-FB is a fork of the Harmony 
   
 
   //it("getBindings should work for import statements (esprima-fb)", function() {
-    var ast = esprimaFb.parse(
-      [
-        "import {x, y as z} from 'xy';",
-        "import xyDefault from 'xy';",
-        "import * as xyNamespace from 'xy';"
-      ].join("\n"),
+    var ast = esprimaFb.parse(`
+        import {x, y as z} from 'xy'
+        import xyDefault from 'xy';
+        import * as xyNamespace from 'xy';`,
       {sourceType: "module"}
     );
 
