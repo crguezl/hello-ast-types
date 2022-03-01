@@ -23,10 +23,10 @@ visit(ast, {
 
         console.log('/*----- tutu scope ----*/');
 
-        console.log(ins(path.scope.getBindings()));
+        console.log(ins(path.scope.getBindings())); /* { a: [ NodePath {... } ], b: [   NodePath { ...}  ] } */
 
         console.log('/*----- global scope ----*/');
-        console.log(ins(path.parent.scope.getBindings()));
+        console.log(ins(path.parent.scope.getBindings())); /* { a: [ NodePath {... } ], tutu: [   NodePath { ...}  ] } */
 
         this.abort();
 
