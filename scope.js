@@ -1,36 +1,54 @@
-import { namedTypes as n, builders as b, visit } from "ast-types";
-import recast from "recast";
-import flow from  "flow-parser";
-const deb = x => (JSON.stringify(x, null,2));
+import assert from "assert";
+import { parse, Syntax } from "espree";
+import {
+    Type,
+    namedTypes as n,
+    builders as b,
+    Path,
+    NodePath,
+    PathVisitor,
+    builtInTypes as builtin,
+    use,
+    getSupertypeNames,
+    getFieldValue,
+    eachField,
+    visit,
+    defineMethod,
+    astNodesAreEquivalent,
+  } from "ast-types";
 
-const code = `
-const a = 4;
+  const deb = x => (JSON.stringify(x, null, 2));
+  var globalScope;
 
-function tutu(a) {
-    const b = a+1;
-    function titi(x) {
-        const d = x*2;
-        return d:
+  var scope = `
+    var foo = 42;
+    function bar(baz) {
+      return baz + foo;
     }
-    return b;
-}
-
-tutu(a);
 `;
 
-let ast = flow.parse(code);
-let variable = process.argv[2] || 'a';
-visit(ast, {
+  var ast = parse(scope);
 
-    visitVariableDeclarator(path) {
-        const node = path.node;
+  visit(ast, {
+    visitProgram: function(path) {
+      console.log(`Visiting Program node. path.scope.isGlobal= ${path.scope.isGlobal}`);
+      globalScope = path.scope;
+      console.log(globalScope);
+      this.traverse(path);
+    },
 
-        console.log(node.id.name, path.scope.isGlobal, path.scope.depth);
+    visitFunctionDeclaration: function(path) {
+      var node = path.node;
+      console.log(`Visiting FunctionDeclaration node. path.scope.isGlobal= ${path.scope.isGlobal}`);
 
-        this.traverse(path)
 
-        // Returns {  isGlobal: false if local, didScan: true if found }
-        console.log(`Searching for '${variable}' ${deb(path.scope.lookup(variable))}`)
+      const name = node.id ? node.id.name : null;
+      assert.strictEqual(name, "bar");
+      console.log(deb(path.scope));
+      console.log(path.scope.parent == globalScope);
+
+      console.log(path.scope.getGlobalScope() == globalScope);
+
+      this.traverse(path);
     }
-})
-
+  });
