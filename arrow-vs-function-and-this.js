@@ -8,13 +8,13 @@ Example illustrating: that:
 let g = {
     myVar: 'g',
     gFunc: function() { 
-        console.log(this.myVar);  // global
+        console.log(this.myVar);  // g
         let obj = {
             myVar: 'foo',       
             a: () => console.log(this.myVar), //  this is the "this" of gFunc
             objFunc: function() { 
               console.log(this.myVar); // foo
-              this.a()                 // global
+              this.a()                 // g
             }
         };
         obj.objFunc()
