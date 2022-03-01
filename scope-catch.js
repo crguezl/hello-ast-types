@@ -2,8 +2,6 @@ import assert from "assert";
 import { parse } from "espree";
 import { namedTypes as n, NodePath,} from "ast-types";
 
-const deb = (x) => JSON.stringify(x, null, 2);
-
 // "catch block scope"
 var catchWithVarDecl = `
   function foo(e) {
