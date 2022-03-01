@@ -1,20 +1,7 @@
 //import  * as espree from "espree";
-import { parse, Syntax } from "espree";
+import { parse } from "espree";
 import {
-    Type,
-    namedTypes as n,
-    builders as b,
-    Path,
     NodePath,
-    PathVisitor,
-    builtInTypes as builtin,
-    use,
-    getSupertypeNames,
-    getFieldValue,
-    eachField,
-    visit,
-    defineMethod,
-    astNodesAreEquivalent,
   } from "ast-types";
 
   const deb = x => (JSON.stringify(x, null, 2));
