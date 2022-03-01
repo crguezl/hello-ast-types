@@ -36,7 +36,7 @@ assert.strictEqual(catchScope.declares("f"), false);
 assert.strictEqual(catchScope.lookup("e"), catchScope);
 assert.strictEqual(catchScope.lookup("f"), fooScope);
 
-//it("should shadow only the parameter in nested scopes", function() {
+//it should shadow only the parameter in nested scopes
 var closurePath = catchPath.get("body", "body", 1, "argument");
 var closureScope = closurePath.scope;
 n.FunctionExpression.assert(closureScope.node);
