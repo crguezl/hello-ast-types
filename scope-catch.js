@@ -2,7 +2,7 @@ import assert from "assert";
 import { parse } from "espree";
 import { namedTypes as n, NodePath,} from "ast-types";
 
-// "catch block scope"
+// "catch block scope" https://astexplorer.net/#/gist/f00452c960b249ed36aacc08cacaaa34/646c9796cf42772a97f8b6448a12e99f7610838c
 var catchWithVarDecl = `
   function foo(e) {
     try {
@@ -33,6 +33,7 @@ assert.strictEqual(fooScope.lookup("e"), fooScope);
 n.CatchClause.assert(catchScope.node);
 assert.strictEqual(catchScope.declares("e"), true);
 assert.strictEqual(catchScope.declares("f"), false);
+
 assert.strictEqual(catchScope.lookup("e"), catchScope);
 assert.strictEqual(catchScope.lookup("f"), fooScope);
 
@@ -40,9 +41,11 @@ assert.strictEqual(catchScope.lookup("f"), fooScope);
 var closurePath = catchPath.get("body", "body", 1, "argument");
 var closureScope = closurePath.scope;
 n.FunctionExpression.assert(closureScope.node);
+
 assert.strictEqual(closureScope.declares("e"), false);
 assert.strictEqual(closureScope.declares("f"), false);
 assert.strictEqual(closureScope.declares("g"), true);
+
 assert.strictEqual(closureScope.lookup("g"), closureScope);
 assert.strictEqual(closureScope.lookup("e"), catchScope);
 assert.strictEqual(closureScope.lookup("f"), fooScope);
