@@ -14,7 +14,7 @@ import * as esprimaFb from "esprima-fb"; // Esprima-FB is a fork of the Harmony 
     };
   `;
 
-  // it("getBindings should get local and global scope bindings", function() {
+  // getBindings should get local and global scope bindings 
     var ast = parse(scope);
     var checked = [];
 
@@ -55,7 +55,7 @@ import * as esprimaFb from "esprima-fb"; // Esprima-FB is a fork of the Harmony 
     );
   
 
-  //it("getBindings should work for import statements (esprima-fb)", function() {
+  //getBindings should work for import statements (esprima-fb)
     var ast = esprimaFb.parse(`
         import {x, y as z} from 'xy'
         import xyDefault from 'xy';
