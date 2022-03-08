@@ -1,10 +1,5 @@
 import { parse } from "espree";
-import {
-  NodePath,
-  namedTypes as n,
-  builders as b,
-  builtInTypes as builtin,
-} from "ast-types";
+import { NodePath } from "ast-types";
 import cj from "color-json";
 
 const skip = (key, value) => {
