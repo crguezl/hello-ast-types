@@ -1,4 +1,3 @@
-//import  * as espree from "espree";
 import { parse } from "espree";
 import {
   NodePath,
@@ -6,11 +5,12 @@ import {
   builders as b,
   builtInTypes as builtin,
 } from "ast-types";
+import cj from "color-json";
 
-const locInfo = (key, value) => {
+const skip = (key, value) => {
   if (key !== "start" && key !== "end" && key !== "raw") return value;
 };
-const deb = (x) => JSON.stringify(x, locInfo, 2);
+const deb = (x) => cj(JSON.stringify(x, skip, 2));
 
 var programPath = new NodePath(parse("x = 1; y = 2"));
 
