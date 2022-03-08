@@ -23,6 +23,9 @@ var yExpressionStatement = programPath.get("body", 1);
 var xAssignmentExpression = xExpressionStatement.get("expression");
 var yAssignmentExpression = yExpressionStatement.get("expression");
 
+console.log( // Not a direct property but an element of an array
+  xExpressionStatement.node === xExpressionStatement.parent.node.body[0] // true
+)
 console.log(deb(xAssignmentExpression.node));
 console.log(deb(yAssignmentExpression.node));
 /*
