@@ -3,7 +3,7 @@ import { NodePath } from "ast-types";
 import cj from "color-json";
 
 const skip = (key, value) => {
-  if (key !== "start" && key !== "end" && key !== "raw") return value;
+  if (key !== "start" && key !== "end" && key !== "raw" && key !== "sourceType") return value;
 };
 const deb = (x) => cj(JSON.stringify(x, skip, 2));
 
