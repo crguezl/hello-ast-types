@@ -1,11 +1,8 @@
 import { parse } from "espree";
 import { NodePath } from "ast-types";
 import cj from "color-json";
+import deb from "./deb.js";
 
-const skip = (key, value) => {
-  if (key !== "start" && key !== "end" && key !== "raw" && key !== "sourceType") return value;
-};
-const deb = (x) => cj(JSON.stringify(x, skip, 2));
 
 var programPath = new NodePath(parse("x = 1; y = 2"));
 
