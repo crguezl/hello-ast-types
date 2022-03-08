@@ -1,9 +1,9 @@
 //import  * as espree from "espree";
-import { parse, Syntax } from "espree";
+import { parse } from "espree";
 import {
+  NodePath,
   namedTypes as n,
   builders as b,
-  NodePath,
   builtInTypes as builtin,
 } from "ast-types";
 
