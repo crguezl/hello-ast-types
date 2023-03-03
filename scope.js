@@ -1,3 +1,4 @@
+import util from 'util';
 import assert from "assert";
 import { parse, Syntax } from "espree";
 import {
@@ -17,7 +18,7 @@ import {
     astNodesAreEquivalent,
   } from "ast-types";
 
-  const deb = (x, depth=null) => (JSON.stringify(x, depth, 2));
+  const deb = (x, depth=null, indent=2) => (util.inspect(x, depth, indent));
   var globalScope;
 
   var scopeCode = `
@@ -43,15 +44,24 @@ import {
 
     visitFunctionDeclaration: function(path) {
       var node = path.node;
-      console.log(`Visiting FunctionDeclaration node. Is this the global scope? path.scope.isGlobal= ${path.scope.isGlobal}`);
+      var scope = path.scope;
+      console.log(`Visiting FunctionDeclaration node. Is this the global scope? path.scope.isGlobal= ${scope.isGlobal}`);
       const name = node.id ? node.id.name : null;
       assert.strictEqual(name, "bar");
-      let bindings = path.scope.getBindings();
+      let bindings = scope.getBindings();
       let names = Object.keys(bindings);
       console.log(`  names inside bar: ${names}`);
       console.log(`  Type of the parent of baz: ${deb(bindings.baz[0].parentPath.node.type)}`);
-      console.log(`  The parent scope of the function scope is the global scope?`,path.scope.getGlobalScope() == globalScope);
+      console.log(`  The parent scope of the function scope is the global scope?`,scope.getGlobalScope() == globalScope);
+      console.log(`  The scope of this function is at depth ${scope.depth}`);
 
+      console.log(`  Is 'foo' declared at global scope? ${scope.lookup("foo") == globalScope}`);
+      console.log(`  Is 'baz' declared at global scope? ${scope.lookup("baz") == globalScope}`);
+      console.log(`  Is 'baz' declared at the function scope? ${scope.lookup("baz") == scope}`);
+      console.log(`  Is 'bar' declared at the function scope? ${scope.lookup("bar") == scope}`);
+      console.log(`  Is 'bar' declared at the global scope? ${scope.lookup("bar") == globalScope}`);
+
+      
       this.traverse(path);
     }
   });
