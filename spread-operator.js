@@ -2,6 +2,7 @@ import { namedTypes as n, builders as b, visit } from "ast-types";
 import recast from "recast";
 import flow from  "flow-parser";
 //import * as flow from 'espree';
+import { simpleDeb as deb } from "./deb.js"
 
 var sliceExpr = b.memberExpression(
     b.memberExpression(
@@ -17,7 +18,7 @@ var sliceExpr = b.memberExpression(
     false
   );
 // Array.prototype.slice.call
-//console.log(recast.print(sliceExpr).code);
+console.log(deb(sliceExpr)); // console.log(recast.print(sliceExpr).code);
 
 let code = `
 function tutu(x, ...rest) {
@@ -70,7 +71,7 @@ visit(ast, {
     
     // For the purposes of this example, we won't worry about functions
     // with Expression bodies.
-    n.BlockStatement.assert(node.body);
+    // n.BlockStatement.assert(node.body);
 
     // Use types.builders to build a variable declaration of the form
     //

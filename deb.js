@@ -1,7 +1,18 @@
 import cj from "color-json";
 
-const SkippedKeys = new Set(["start", "end", "raw", "sourceType"]);
-const skip = (key, value) => SkippedKeys.has(key)? undefined : value;
-const deb = x => cj(JSON.stringify(x, skip, 2));
+const Radical = ["loc", "comments", "start", "end", "raw", 
+                 "sourceType", "optional", "computed", 
+                 "typeAnnotation"];
+const Brutal = Radical.concat(["name"]);
 
-export default deb;
+const SkippedKeys = new Set(Radical);
+const BrutalKeys = new Set(Brutal);
+
+
+const skip = (key, value) => SkippedKeys.has(key)? undefined : value;
+const skipBrutal = (key, value) => BrutalKeys.has(key)? undefined : value;
+const colorDeb = x => cj(JSON.stringify(x, skip, 2));
+const simpleDeb = x => JSON.stringify(x, skip, 2);
+const deb = x => JSON.stringify(x, skipBrutal, 1);
+
+export { deb, simpleDeb, colorDeb };

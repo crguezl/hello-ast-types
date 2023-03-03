@@ -6,6 +6,10 @@ const deb = x => (JSON.stringify(x, null,2));
 const ins = x => util.inspect(x, {depth:3});
 
 const code = `
+$a = 4 + 2 , $b = 5 * $a , $print($b); 
+`;
+
+/*const code = `
 const a = 4;
 
 function tutu(a) {
@@ -15,25 +19,27 @@ function tutu(a) {
 
 tutu(a);
 `;
-
+*/
 let ast = flow.parse(code);
 visit(ast, {
-    visitFunction(path) {
-        const node = path.node;
+    
+    // visitFunction(path) {
+    //     const node = path.node;
 
-        console.log('/*----- tutu scope ----*/');
+    //     console.log('/*----- tutu scope ----*/');
 
-        console.log(Object.keys(path.scope.getBindings())); /* [ 'a', 'b' ] */
+    //     console.log(Object.keys(path.scope.getBindings())); /* [ 'a', 'b' ] */
 
-        console.log('/*----- global scope ----*/');
-        console.log(ins(path.parent.scope.getBindings())); /* { a: [ NodePath {... } ], tutu: [   NodePath { ...}  ] } */
+    //     console.log('/*----- global scope ----*/');
+    //     console.log(ins(path.parent.scope.getBindings())); /* { a: [ NodePath {... } ], tutu: [   NodePath { ...}  ] } */
 
-        this.abort();
+    //     this.abort();
 
-        //this.traverse(path)
-    },
+    //     //this.traverse(path)
+    // },
+    
 
-    /*
+    
     visitProgram(path) {
         const node = path.node;
 
@@ -41,6 +47,6 @@ visit(ast, {
 
         this.traverse(path)
     }
-    */
+    
 })
 

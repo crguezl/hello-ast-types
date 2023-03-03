@@ -17,37 +17,40 @@ import {
     astNodesAreEquivalent,
   } from "ast-types";
 
-  const deb = x => (JSON.stringify(x, null, 2));
+  const deb = (x, depth=null) => (JSON.stringify(x, depth, 2));
   var globalScope;
 
-  var scope = `
+  var scopeCode = `
     var foo = 42;
     function bar(baz) {
       return baz + foo;
     }
 `;
 
-  var ast = parse(scope);
+  var ast = parse(scopeCode);
 
   visit(ast, {
     visitProgram: function(path) {
       console.log(`Visiting Program node. path.scope.isGlobal= ${path.scope.isGlobal}`);
       globalScope = path.scope;
-      console.log(globalScope);
+      let bindings = globalScope.getBindings();
+      let names = Object.keys(bindings);
+        console.log(`  names inside global scope: ${names}`);
+        console.log(`  Type of the parent of foo: ${deb(bindings.foo[0].parentPath.node.type, 2)}`);
+        console.log(`  Type of the parent of bar: ${deb(bindings.bar[0].parentPath.node.type)}`);
       this.traverse(path);
     },
 
     visitFunctionDeclaration: function(path) {
       var node = path.node;
-      console.log(`Visiting FunctionDeclaration node. path.scope.isGlobal= ${path.scope.isGlobal}`);
-
-
+      console.log(`Visiting FunctionDeclaration node. Is this the global scope? path.scope.isGlobal= ${path.scope.isGlobal}`);
       const name = node.id ? node.id.name : null;
       assert.strictEqual(name, "bar");
-      console.log(deb(path.scope));
-      console.log(path.scope.parent == globalScope);
-
-      console.log(path.scope.getGlobalScope() == globalScope);
+      let bindings = path.scope.getBindings();
+      let names = Object.keys(bindings);
+      console.log(`  names inside bar: ${names}`);
+      console.log(`  Type of the parent of baz: ${deb(bindings.baz[0].parentPath.node.type)}`);
+      console.log(`  The parent scope of the function scope is the global scope?`,path.scope.getGlobalScope() == globalScope);
 
       this.traverse(path);
     }

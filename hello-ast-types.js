@@ -1,6 +1,6 @@
 import { parse } from "espree";
 import { NodePath } from "ast-types";
-import deb from "./deb.js";
+import { colorDeb as deb } from "./deb.js";
 
 var programPath = new NodePath(parse("x = 1; y = 2"));
 
