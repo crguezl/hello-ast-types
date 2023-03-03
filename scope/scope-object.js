@@ -4,8 +4,8 @@ import util from 'util';
 const ins = x => util.inspect(x, {depth:3});
 
 const codes = [
-    `$a = 4 + 2 , $b = 5 * $a , $print($b)`, // no declarations
-    `const $print = console.log; let $a; let $b; $a = 4 + 2 , $b = 5 * $a , $print($b);`
+    `$a = 4 + 2 , $b = 5 * $a , $print($b)`, // no declarations. Output: []
+    `const $print = console.log; let $a; let $b; $a = 4 + 2 , $b = 5 * $a , $print($b);` // [ '$print', '$a', '$b' ]
 ];
 
 codes.forEach(code => {
