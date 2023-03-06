@@ -1,9 +1,6 @@
 // outputs a compact string representation of the AST. Example:
-//   ✗ node cast.cjs 'if(a) 1; else 2'             
-//   Program(IfStatement(Identifier(a)ExpressionStatement(Literal(1))ExpressionStatement(Literal(2))))
-//   ✗ node cast.cjs 'while (x == 1) {}'             
-//   Program(WhileStatement(BinaryExpression(==()Identifier(x)Literal(1))BlockStatement()))
-const util = require("util");
+// ✗ node cast2.cjs 'while (x == 1) {}' 0
+// ["Program",["WhileStatement",["BinaryExpression","==",["Identifier","x"],["Literal",1]],["BlockStatement"]]]
 const espree = require("espree");
 const astTypes = require("ast-types");
 
@@ -34,4 +31,4 @@ astTypes.visit(ast, {
   }
 });
 
-console.log(JSON.stringify(tree[0], null, 2));
+console.log(JSON.stringify(tree[0], depth));
