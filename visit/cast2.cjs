@@ -1,6 +1,8 @@
 // outputs a compact string representation of the AST. Example:
 // ✗ node cast2.cjs 'while (x == 1) {}' 0
 // ["Program",["WhileStatement",["BinaryExpression","==",["Identifier","x"],["Literal",1]],["BlockStatement"]]]
+// ✗ node cast2.cjs '' 0                 
+// ["Program",["ExpressionStatement",["AssignmentExpression","=",["Identifier","a"],["Literal",1]]],["ExpressionStatement",["AssignmentExpression","=",["Identifier","b"],["Literal",2]]]]
 const espree = require("espree");
 const astTypes = require("ast-types");
 
