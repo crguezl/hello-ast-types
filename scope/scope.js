@@ -39,6 +39,7 @@ import {
         console.log(`  names inside global scope: ${names}`);
         console.log(`  Type of the parent of foo: ${deb(bindings.foo[0].parentPath.node.type, 2)}`);
         console.log(`  Type of the parent of bar: ${deb(bindings.bar[0].parentPath.node.type)}`);
+        console.log(`bindings.foo.length = ${bindings.foo.length}`);
       this.traverse(path);
     },
 
