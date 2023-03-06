@@ -1,3 +1,4 @@
+// outputs a compact string representation of the AST
 const espree = require("espree");
 const astTypes = require("ast-types");
 
