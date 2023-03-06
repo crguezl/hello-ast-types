@@ -1,4 +1,6 @@
-// outputs a compact string representation of the AST
+// outputs a compact string representation of the AST. Example:
+//   ✗ node cast.cjs 'if(a) 1; else 2'             
+//   Program(IfStatement(Identifier(a)ExpressionStatement(Literal(1))ExpressionStatement(Literal(2))))
 const espree = require("espree");
 const astTypes = require("ast-types");
 
@@ -9,13 +11,13 @@ let out = '';
 astTypes.visit(ast, {
   visitNode: function(path) {
     out += path.node.type+"(";
-    if (path.node.type === "AssignmentExpression") {
+    if (path.node.operator) {
       out += `${path.node.operator}()`;
     }
     this.traverse(path);
-    if (path.node.type === "Identifier") {
+    if (path.node.name) {
       out += path.node.name;
-    } else if (path.node.type === "Literal") {
+    } else if (path.node.value) {
       out += path.node.value;
     }
     out += ")";
