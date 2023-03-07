@@ -55,7 +55,9 @@ import {
       console.log(`  names inside bar: ${names}`);
       // bindings.baz[0].parentPath is the AST node that declares the variable "baz": "FunctionDeclaration"
       console.log(`  Type of the parent of baz: ${deb(bindings.baz[0].parentPath.node.type)}`);
-      console.log(`  The parent scope of the function scope is the global scope?`,scope.getGlobalScope() == globalScope);
+      debugger;
+      // The scopes are organized in a tree structure, with the global scope at the root.
+      console.log(`  The parent scope of the function scope is the global scope?`,scope.parent == globalScope);
       console.log(`  The scope of this function is at depth ${scope.depth}`);
 
       console.log(`  Is 'foo' declared at global scope? ${scope.lookup("foo") == globalScope}`);
@@ -63,8 +65,19 @@ import {
       console.log(`  Is 'baz' declared at the function scope? ${scope.lookup("baz") == scope}`);
       console.log(`  Is 'bar' declared at the function scope? ${scope.lookup("bar") == scope}`);
       console.log(`  Is 'bar' declared at the global scope? ${scope.lookup("bar") == globalScope}`);
+     
+      this.traverse(path);
+    },
 
-      
+    visitBinaryExpression: function(path) {
+      var node = path.node;
+      var scope = path.scope;
+      console.log(`Visiting BinaryExpression node. Is this the global scope? path.scope.isGlobal= ${scope.isGlobal}`);
+      console.log(`  The scope of this BinaryExpression is at depth ${scope.depth}`);
+      console.log(`  Is '${node.left.name}' declared at global scope? ${scope.lookup(node.left.name) == globalScope}`);
+      console.log(`  Is '${node.left.name}' declared at the function scope? ${scope.lookup(node.left.name) == scope}`);
+      console.log(`  Is '${node.right.name}' declared at the function scope? ${scope.lookup(node.right.name) == scope}`);
+      console.log(`  Is '${node.right.name}' declared at the global scope? ${scope.lookup(node.right.name) == globalScope}`);
       this.traverse(path);
     }
   });
