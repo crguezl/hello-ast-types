@@ -37,9 +37,10 @@ import {
       let bindings = globalScope.getBindings();
       let names = Object.keys(bindings);
         console.log(`  names inside global scope: ${names}`);
+        // bindings.foo[0].parentPath is the AST node that declares the variable "foo": "VariableDeclarator"
         console.log(`  Type of the parent of foo: ${deb(bindings.foo[0].parentPath.node.type, 2)}`);
+        // bindings.bar[0].parentPath is the AST node that declares the variable "bar": "FunctionDeclaration"
         console.log(`  Type of the parent of bar: ${deb(bindings.bar[0].parentPath.node.type)}`);
-        console.log(`bindings.foo.length = ${bindings.foo.length}`);
       this.traverse(path);
     },
 
@@ -52,6 +53,7 @@ import {
       let bindings = scope.getBindings();
       let names = Object.keys(bindings);
       console.log(`  names inside bar: ${names}`);
+      // bindings.baz[0].parentPath is the AST node that declares the variable "baz": "FunctionDeclaration"
       console.log(`  Type of the parent of baz: ${deb(bindings.baz[0].parentPath.node.type)}`);
       console.log(`  The parent scope of the function scope is the global scope?`,scope.getGlobalScope() == globalScope);
       console.log(`  The scope of this function is at depth ${scope.depth}`);
