@@ -136,6 +136,21 @@ In the following code `n` is an abbreviation for the `namedTypes` object provide
 import { visit, namedTypes as n, } from "ast-types";
 ```
 
+Remmber that:
+
+1. The object `n` has a `check` method to check the type of a node.
+2. The children of a `MemberExpression` node have names `object` and `property`:
+3. 
+```js
+> e = require('espree')
+> e.VisitorKeys.MemberExpression
+[ 'object', 'property' ]
+> b = require("ast-types").builder
+> gfn = require("ast-types").getFieldNames, null
+> gfn({type: "MemberExpression"})
+[ 'type', 'optional', 'object', 'property', 'computed' ]
+```
+
 Notice how 
 
 1. We traverse the AST visiting the `MemberExpression` nodes
