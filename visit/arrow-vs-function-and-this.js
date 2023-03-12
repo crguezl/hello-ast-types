@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /*
 Example illustrating: that:
 
