@@ -130,26 +130,29 @@ is:
 ]
 ```
 
-Here is the code. Here `n` is an abbreviation for the `namedTypes` object provided by `ast-types`:
+In the following code `n` is an abbreviation for the `namedTypes` object provided by `ast-types`:
 
 ```js
+import { visit, namedTypes as n, } from "ast-types";
+```
 
+Notice how 
+
+1. We traverse the AST visiting the `MemberExpression` nodes
+2. We check that the child `object` of the `MemberExpression` node is of type `Identifier`  and its name is `arguments`
+3. We check that the child `property` of the `MemberExpression` node is of type `Identifier`  and its name is `callee`
+
+```js
 visit(ast, {
   visitMemberExpression(path) {
     var node = path.node;
     if (
-      n.Identifier.check(node.object) &&
+      n.Identifier.check(node.object) && 
       node.object.name === "arguments" &&
       n.Identifier.check(node.property)
     ) {
       if (node.property.name == "callee") console.error("Warning! 'arguments.callee' is used in this code");
     }
-
-    // It's your responsibility to call this.traverse with some
-    // NodePath object (usually the one passed into the visitor
-    // method) before the visitor method returns, or return false to
-    // indicate that the traversal need not continue any further down
-    // this subtree.
     this.traverse(path);
   }
 });
