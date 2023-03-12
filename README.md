@@ -189,19 +189,33 @@ let code = `
 function tutu(x, ...rest) {
     return x + rest[0];
 }
+module.exports = tutu;
 `;
 ```
 
 gives the output:
 
 ```js
-➜  hello-ast-types git:(flow-parser) ✗ node spread-operator.js
-{ parse: [Function (anonymous)] }
+➜  visit git:(master) ✗ node spread-operator.js > salida.cjs
+➜  visit git:(master) ✗ cat salida.cjs 
 function tutu(x) {
     var rest = Array.prototype.slice.call(arguments, 1);
     return x + rest[0];
 }
 ```
+
+That we can use this way:
+
+```js
+module.exports = tutu;
+➜  visit git:(master) ✗ node
+> tutu = require("./salida.cjs")
+[Function: tutu]
+> tutu(2,3,4,5)
+5
+```
+
+See the full code at [visit/spread-operator.js](visit/spread-operator.js)
 
 ## check-this-usage.js
 
