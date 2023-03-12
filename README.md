@@ -158,7 +158,7 @@ visit(ast, {
 });
 ```
 
-See the solution in file <visit/visitmemberexpression.js>
+See the solution in file [visit/visitmemberexpression.js](visit/visitmemberexpression.js)
 
 ## spread-operator.js
 
