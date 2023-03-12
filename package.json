@@ -5,11 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --inspect-brk index.js",
-    "visit": "node visitmemberexpression.js",
-    "spread": "node spread-operator.js",
-    "this": "node check-this-usage.js",
-    "scope-object": "node scope/scope-object.js"
+    "start": "node --inspect-brk introduction/index.js",
+    "visit": "node visit/visitmemberexpression.js",
+    "spread": "node visit/spread-operator.js",
+    "this": "node visit/check-this-usage.js",
+    "scope": "node scope/scope.js"
   },
   "keywords": [],
   "author": "Casiano Rodriguez Leon <crguezl@ull.edu.es> (https://crguezl.github.io/)",

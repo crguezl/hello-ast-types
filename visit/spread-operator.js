@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { builders as b, visit } from "ast-types";
 import recast from "recast";
 import flow from  "flow-parser";
@@ -58,9 +59,8 @@ visit(ast, {
 
     path.get("body", "body").unshift(restVarDecl);
 
-    // Nullify node.rest now that we have simulated the behavior of
-    // the rest parameter using ordinary JavaScript.
-    path.get("rest").replace(null);
+    // Delete node.rest now that we have simulated the behavior of the rest parameter using ordinary JavaScript.
+    delete(node.rest);
 
   }
 });

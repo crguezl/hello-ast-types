@@ -202,12 +202,13 @@ function tutu(x) {
     var rest = Array.prototype.slice.call(arguments, 1);
     return x + rest[0];
 }
+
+module.exports = tutu;
 ```
 
 That we can use this way:
 
 ```js
-module.exports = tutu;
 ➜  visit git:(master) ✗ node
 > tutu = require("./salida.cjs")
 [Function: tutu]
