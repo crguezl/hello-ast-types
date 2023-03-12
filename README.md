@@ -158,6 +158,8 @@ visit(ast, {
 });
 ```
 
+See the solution in file <visit/visitmemberexpression.js>
+
 ## spread-operator.js
 
 Translate ES6 spread operator to older versions of JS.
