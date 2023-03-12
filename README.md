@@ -67,7 +67,13 @@ is:
 
 ## visitmemberexpression.js 
 
-```
+The 5th edition of ECMAScript (ES5) forbids the use of `arguments.callee`.
+
+The goal of this code example: you want to detect uses of this old trick to update the code.
+
+Here is an execution of the example:
+
+```js
 ➜  hello-ast-types git:(flow-parser) ✗ node visitmemberexpression.js 
 Input:
 
@@ -80,6 +86,73 @@ var fac = function(n) { return !(n > 1) ? 1 : arguments.callee(n - 1) * n; }
 
 ---
 Warning! 'arguments.callee' is used in this code
+```
+
+The summarized AST for the input code 
+
+```js
+var fac = function(n) { return !(n > 1) ? 1 : arguments.callee(n - 1) * n; }
+```
+
+is:
+
+```js
+✗ compast -p 'var fac = function(n) { return !(n > 1) ? 1 : arguments.callee(n - 1) * n; }'
+['Program',
+  [ 'VariableDeclaration',
+    [ 'VariableDeclarator',
+      [ 'Identifier', 'fac' ],
+      [ 'FunctionExpression',
+        [ 'Identifier', 'n' ],
+        [ 'BlockStatement',
+          [ 'ReturnStatement',
+            [ 'ConditionalExpression',
+              [ 'UnaryExpression', '!',
+                [ 'BinaryExpression', '>',  [ 'Identifier', 'n' ], [ 'Literal', 1 ] ]
+              ],
+              [ 'Literal', 1 ],
+              [ 'BinaryExpression', 
+                '*',
+                [ 'CallExpression',
+                  [ 'MemberExpression',
+                    [ 'Identifier', 'arguments' ],  [ 'Identifier', 'callee' ]
+                  ],
+                  [ 'BinaryExpression', '-', [ 'Identifier', 'n' ], [ 'Literal', 1 ] ]
+                ],
+                [ 'Identifier', 'n' ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+```
+
+Here is the code. Here `n` is an abbreviation for the `namedTypes` object provided by `ast-types`:
+
+```js
+
+visit(ast, {
+  visitMemberExpression(path) {
+    var node = path.node;
+    if (
+      n.Identifier.check(node.object) &&
+      node.object.name === "arguments" &&
+      n.Identifier.check(node.property)
+    ) {
+      if (node.property.name == "callee") console.error("Warning! 'arguments.callee' is used in this code");
+    }
+
+    // It's your responsibility to call this.traverse with some
+    // NodePath object (usually the one passed into the visitor
+    // method) before the visitor method returns, or return false to
+    // indicate that the traversal need not continue any further down
+    // this subtree.
+    this.traverse(path);
+  }
+});
 ```
 
 ## spread-operator.js

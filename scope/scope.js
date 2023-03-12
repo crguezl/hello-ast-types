@@ -29,7 +29,7 @@ import {
 `;
 
   var ast = parse(scopeCode);
-
+  
   visit(ast, {
     visitProgram: function(path) {
       console.log(`Visiting Program node. path.scope.isGlobal= ${path.scope.isGlobal}`);
@@ -47,6 +47,7 @@ import {
     visitFunctionDeclaration: function(path) {
       var node = path.node;
       var scope = path.scope;
+
       console.log(`Visiting FunctionDeclaration node. Is this the global scope? path.scope.isGlobal= ${scope.isGlobal}`);
       const name = node.id ? node.id.name : null;
       assert.strictEqual(name, "bar");
@@ -72,6 +73,8 @@ import {
     visitBinaryExpression: function(path) {
       var node = path.node;
       var scope = path.scope;
+      debugger;
+
       console.log(`Visiting BinaryExpression node. Is this the global scope? path.scope.isGlobal= ${scope.isGlobal}`);
       console.log(`  The scope of this BinaryExpression is at depth ${scope.depth}`);
       console.log(`  Is '${node.left.name}' declared at global scope? ${scope.lookup(node.left.name) == globalScope}`);
