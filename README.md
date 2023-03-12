@@ -6,7 +6,7 @@ README.md
 ## index.js
 
 ```
-$ node index.js > salida.js
+➜  hello-ast-types git:(master) node introduction/index.js
 ```
 
 The AST built for 
