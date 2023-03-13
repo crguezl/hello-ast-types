@@ -21,7 +21,7 @@ let g = {
             };
             nestedObj.objFunc() // foo
         }
-        chuchu(); // 1: undefined. "this" is taken from the one it exists on "chuchu"
+        chuchu(); // 1: undefined. "this" is taken from the one it exists on "chuchu" wich is "undefined"
         chuchu.call({ myVar: 'bar' }) // 1: Now "chuchu" has a "this" and the arrow function logs the new "this" of "chuchu": { myVar: 'bar' } 
     },
 }
