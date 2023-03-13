@@ -2,15 +2,15 @@
 /*
 Example illustrating: that:
 
-1. Arrow functions take their value of "this" from the lexical scope.
+1. Arrow functions take their value of "this" from the lexical scope 
+   and it is taken from the parent function scope even if the "this" in that scope is undefined.
 2. Functions take their value of "this" from the context object.
-
 */
 let g = {
     myVar: 'g',
     gFunc: function () {
         console.log(this.myVar);  // g
-        function chuchu() {
+        function chuchu() { // Function without a defined "this"
             let nestedObj = {
                 myVar: 'foo',
                 a: () => console.log(this), //  1
