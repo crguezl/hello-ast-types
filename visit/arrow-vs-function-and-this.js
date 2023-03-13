@@ -3,6 +3,8 @@
 Example illustrating: that:
 
 1. Arrow functions take their value of "this" from the lexical scope.
+   That is, traverse the scopes until you find a "this" binding. 
+   Notice that, if found, that "this" will reference the context of some function that wraps the arrow function.
 2. Functions take their value of "this" from the context object.
 
 */

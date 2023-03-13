@@ -1,5 +1,5 @@
-import { namedTypes as n, builders as b, visit } from "ast-types";
-import recast from "recast";
+#!/usr/bin/env node
+import { namedTypes as n, visit } from "ast-types";
 import flow from "flow-parser";
 const deb = (x) => JSON.stringify(x, null, 2);
 

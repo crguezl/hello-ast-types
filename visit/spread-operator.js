@@ -28,7 +28,6 @@ function tutu(x, ...rest) {
 module.exports = tutu;
 `;
 
-// Warning!!! the AST produced by flow doesn't seem to be fully compatible with ast-types
 let ast = flow.parse(code, {ecmaVersion: 7, loc: false});
 
 visit(ast, {
